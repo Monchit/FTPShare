@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Detail";
+}
+
+<h3>@ViewBag.Folder</h3>
+
+<hr />
+
+<form id="formUpload" name="formUpload" action="@Url.Action("OwnerUpload")" method="post" class="form-horizontal" enctype="multipart/form-data">
+    <h3>Upload Files</h3>
+    @Html.Partial("_SectionUpload")
+    <button type="submit" id="btnUpload" name="btnUpload" class="btn btn-primary"><i class="icon-upload icon-white"></i> Upload</button>
+</form>
+
+<hr />
+
+<form>
+    <h3>Authorize</h3>
+
+</form>

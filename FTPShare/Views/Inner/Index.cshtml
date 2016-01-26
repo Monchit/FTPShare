@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "My Folder";
+}
+
+<style type="text/css">
+    /*fix jTable*/
+    span.jtable-goto-page select, span.jtable-page-size-change select {
+        height: 25px;
+        width: 60px;
+        padding: 2px 2px;
+        margin-bottom:auto;
+    }
+    div.jtable-main-container table.jtable thead th {
+        text-align: center;
+    }
+    div.jtable-main-container > table.jtable > tbody > tr.jtable-data-row > td {
+        text-align: center;
+    }
+</style>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#jTableFolder').jtable({
+            title: 'My Folder',
+            paging: true, //Enable paging
+            pageSize: 10, //Set page size (default: 10)
+            sorting: true, //Enable sorting
+            selecting: true, //Enable selecting
+            defaultSorting: 'folder', //Set default sorting
+            actions: {
+                listAction: '@Url.Action("FolderList","Inner")',
+                deleteAction: '@Url.Action("DeleteFolder","Inner")',
+                updateAction: '@Url.Action("UpdateFolder","Inner")',
+                createAction: '@Url.Action("CreateFolder","Inner")'
+            },
+            fields: {
+                owner: { title: 'Owner', create: false, edit: false, list: false },
+                folder: {
+                    title: 'Folder Name', key: true, create: true, edit: false,
+                    visibility: 'fixed', //This column always will be shown
+                    display: function (data) {
+                        return $('<a href="@Url.Action("Detail", "Inner")?id=' + data.record.folder + '">' + data.record.folder + '</a>');
+                    }
+                },
+                exp_dt: { title: 'Expire Date', create: true, edit: true, type: 'date', displayFormat: 'yy-mm-dd' }
+            }
+        });
+        //Load student list from server
+        $('#jTableFolder').jtable('load');
+
+        $('#Edit-exp_dt').attr("disabled", "disabled");
+
+    });
+</script>
+
+<div class="alert alert-info">
+    + You can <strong>Create, Delete</strong> folder.<br />
+    - But <u>not</u> <strong>Edit</strong> folder name.
+</div>
+
+<div id="jTableFolder"></div>
+

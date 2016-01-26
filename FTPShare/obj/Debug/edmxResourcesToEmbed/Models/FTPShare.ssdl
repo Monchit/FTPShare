@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FTPShareModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="FTPShareModelStoreContainer">
+    <EntitySet Name="td_file" EntityType="FTPShareModel.Store.td_file" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="td_owner_folder" EntityType="FTPShareModel.Store.td_owner_folder" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="td_reader_user" EntityType="FTPShareModel.Store.td_reader_user" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tm_sys_user" EntityType="FTPShareModel.Store.tm_sys_user" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tm_sys_utype" EntityType="FTPShareModel.Store.tm_sys_utype" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tr_reader_folder" EntityType="FTPShareModel.Store.tr_reader_folder" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_td_file_td_owner_folder" Association="FTPShareModel.Store.FK_td_file_td_owner_folder">
+      <End Role="td_owner_folder" EntitySet="td_owner_folder" />
+      <End Role="td_file" EntitySet="td_file" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tm_sys_user_tm_sys_utype" Association="FTPShareModel.Store.FK_tm_sys_user_tm_sys_utype">
+      <End Role="tm_sys_utype" EntitySet="tm_sys_utype" />
+      <End Role="tm_sys_user" EntitySet="tm_sys_user" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tr_reader_folder_td_owner_folder" Association="FTPShareModel.Store.FK_tr_reader_folder_td_owner_folder">
+      <End Role="td_owner_folder" EntitySet="td_owner_folder" />
+      <End Role="tr_reader_folder" EntitySet="tr_reader_folder" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tr_reader_folder_td_reader_user" Association="FTPShareModel.Store.FK_tr_reader_folder_td_reader_user">
+      <End Role="td_reader_user" EntitySet="td_reader_user" />
+      <End Role="tr_reader_folder" EntitySet="tr_reader_folder" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="td_file">
+    <Key>
+      <PropertyRef Name="owner" />
+      <PropertyRef Name="folder" />
+      <PropertyRef Name="filename" />
+    </Key>
+    <Property Name="owner" Type="nvarchar" Nullable="false" MaxLength="10" />
+    <Property Name="folder" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="filename" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="path" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="exp_dt" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="td_owner_folder">
+    <Key>
+      <PropertyRef Name="owner" />
+      <PropertyRef Name="folder" />
+    </Key>
+    <Property Name="owner" Type="nvarchar" Nullable="false" MaxLength="10" />
+    <Property Name="folder" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="exp_dt" Type="date" Nullable="false" />
+    <Property Name="create_dt" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="td_reader_user">
+    <Key>
+      <PropertyRef Name="owner" />
+      <PropertyRef Name="reader" />
+    </Key>
+    <Property Name="owner" Type="nvarchar" Nullable="false" MaxLength="10" />
+    <Property Name="reader" Type="nvarchar" Nullable="false" MaxLength="10" />
+    <Property Name="pass" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="exp_dt" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tm_sys_user">
+    <Key>
+      <PropertyRef Name="emp_code" />
+    </Key>
+    <Property Name="emp_code" Type="nvarchar" Nullable="false" MaxLength="10" />
+    <Property Name="utype_id" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="tm_sys_utype">
+    <Key>
+      <PropertyRef Name="utype_id" />
+    </Key>
+    <Property Name="utype_id" Type="tinyint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="utype_name" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="authority" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tr_reader_folder">
+    <Key>
+      <PropertyRef Name="owner" />
+      <PropertyRef Name="folder" />
+      <PropertyRef Name="reader" />
+    </Key>
+    <Property Name="owner" Type="nvarchar" Nullable="false" MaxLength="10" />
+    <Property Name="folder" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="reader" Type="nvarchar" Nullable="false" MaxLength="10" />
+  </EntityType>
+  <Association Name="FK_td_file_td_owner_folder">
+    <End Role="td_owner_folder" Type="FTPShareModel.Store.td_owner_folder" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="td_file" Type="FTPShareModel.Store.td_file" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="td_owner_folder">
+        <PropertyRef Name="owner" />
+        <PropertyRef Name="folder" />
+      </Principal>
+      <Dependent Role="td_file">
+        <PropertyRef Name="owner" />
+        <PropertyRef Name="folder" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tm_sys_user_tm_sys_utype">
+    <End Role="tm_sys_utype" Type="FTPShareModel.Store.tm_sys_utype" Multiplicity="0..1" />
+    <End Role="tm_sys_user" Type="FTPShareModel.Store.tm_sys_user" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tm_sys_utype">
+        <PropertyRef Name="utype_id" />
+      </Principal>
+      <Dependent Role="tm_sys_user">
+        <PropertyRef Name="utype_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tr_reader_folder_td_owner_folder">
+    <End Role="td_owner_folder" Type="FTPShareModel.Store.td_owner_folder" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tr_reader_folder" Type="FTPShareModel.Store.tr_reader_folder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="td_owner_folder">
+        <PropertyRef Name="owner" />
+        <PropertyRef Name="folder" />
+      </Principal>
+      <Dependent Role="tr_reader_folder">
+        <PropertyRef Name="owner" />
+        <PropertyRef Name="folder" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tr_reader_folder_td_reader_user">
+    <End Role="td_reader_user" Type="FTPShareModel.Store.td_reader_user" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tr_reader_folder" Type="FTPShareModel.Store.tr_reader_folder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="td_reader_user">
+        <PropertyRef Name="owner" />
+        <PropertyRef Name="reader" />
+      </Principal>
+      <Dependent Role="tr_reader_folder">
+        <PropertyRef Name="owner" />
+        <PropertyRef Name="reader" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

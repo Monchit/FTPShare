@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="efbfa2d8f2de4bc885dd7a3324e879d2" Name="Diagram1">
+        <EntityTypeShape EntityType="FTPShareModel.tm_sys_user" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FTPShareModel.td_file" Width="1.5" PointX="2.875" PointY="3.25" />
+        <EntityTypeShape EntityType="FTPShareModel.td_owner_folder" Width="1.5" PointX="2.875" PointY="0.75" />
+        <EntityTypeShape EntityType="FTPShareModel.td_reader_user" Width="1.5" PointX="7.125" PointY="0.75" />
+        <EntityTypeShape EntityType="FTPShareModel.tm_sys_utype" Width="1.5" PointX="0.75" PointY="2.875" />
+        <EntityTypeShape EntityType="FTPShareModel.tr_reader_folder" Width="1.5" PointX="5" PointY="0.75" />
+        <AssociationConnector Association="FTPShareModel.FK_td_file_td_owner_folder" />
+        <AssociationConnector Association="FTPShareModel.FK_tr_reader_folder_td_owner_folder" />
+        <AssociationConnector Association="FTPShareModel.FK_tr_reader_folder_td_reader_user" />
+        <AssociationConnector Association="FTPShareModel.FK_tm_sys_user_tm_sys_utype" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

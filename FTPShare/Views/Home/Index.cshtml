@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<style type="text/css">
+.form-signin {
+    max-width: 360px;
+    padding: 19px 29px 29px;
+    margin: 0 auto 20px;
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+            border-radius: 5px;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+        -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+            box-shadow: 0 1px 2px rgba(0,0,0,.05);
+}
+/*.form-signin .form-signin-heading {
+    margin-bottom: 10px;
+}
+.form-signin input[type="text"],
+.form-signin input[type="password"] {
+    font-size: 16px;
+    height: auto;
+    margin-bottom: 15px;
+    padding: 7px 9px;
+}*/
+</style>
+<form id="form-signin" name="form-signin" class="form-signin form-horizontal" action="@Url.Action("Login","Home")" method="post">
+    <h2 class="form-signin-heading">Please log in</h2>
+    <hr />
+    <div class="control-group">
+        <label class="control-label" for="loginType">TYPE :</label>
+        <div class="controls">
+            <select id="loginType" name="loginType" class="span2"><option value="inner">TNC</option><option value="outer">Partners</option></select>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="loginType">USERNAME :</label>
+        <div class="controls">
+            <input id="Username" name="Username" type="text" class="span2" placeholder="Username">
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="loginType">PASSWORD :</label>
+        <div class="controls">
+            <input id="Password" name="Password" type="password" class="span2" placeholder="Password">
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <button class="btn btn-primary" type="submit">Log in</button>
+        </div>
+    </div>
+</form>

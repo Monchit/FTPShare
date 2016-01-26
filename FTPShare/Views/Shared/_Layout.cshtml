@@ -1,0 +1,84 @@
+﻿@using FTPShare.Helpers
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="x-ua-compatible" content="IE=8" />
+        <title>@ViewBag.Title | Share Files</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+ 
+        @Styles.Render("~/Content/bootstrap")
+        @Styles.Render("~/Content/themes/base/css")
+        @Styles.Render("~/Content/formvalidator")
+        @Styles.Render("~/Content/jTable")
+        <style type="text/css">
+        body {
+            padding-top: 15px;
+            padding-bottom: 40px;
+        }
+
+        /* Custom container */
+        .container-narrow {
+            margin: 0 auto;
+            max-width: 700px;
+        }
+        .container-narrow > hr {
+            margin: 30px 0;
+        }
+        </style>
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/jqueryui")
+        @Scripts.Render("~/bundles/jTable")
+        @Scripts.Render("~/bundles/formvalidator")
+        @Scripts.Render("~/bundles/noty")
+    </head>
+    <body>
+        <div class="container-narrow">
+
+            <div class="masterhead">
+                <ul class="nav nav-pills pull-right">
+                    
+                @if (Session["FTP_SysAuthority"] != null)
+                {
+
+                }
+
+                @if (Session["FTP_Auth"] != null)
+                {
+                    @Html.MenuLink("Main", "Index", "Inner")
+                    @Html.MenuLink("Reader", "Reader", "Inner")
+                    @Html.MenuLink("Logout", "Logout", "Home")
+                }
+                else if (Session["FTP_Partner"] != null)
+                {
+                    @Html.MenuLink("Main", "Index", "Outer")
+                    @Html.MenuLink("Logout", "Logout", "Home")
+                }else{
+                    @Html.MenuLink("Home", "Index", "Home")
+                }
+                </ul>
+                <h3 class="muted">TNC SHARE FILES</h3>
+            </div>
+            <hr>
+
+            <div class="container-fluid">
+                @RenderBody()
+            </div>
+            <hr>
+
+            <div class="footer">
+                <p>Copyright &copy; @DateTime.Now.Year - Thai NOK Co.,Ltd. All Rights Reserved.</p>
+            </div>
+
+        </div> <!-- /container -->
+        @RenderSection("scripts", required: false)
+    </body>
+</html>

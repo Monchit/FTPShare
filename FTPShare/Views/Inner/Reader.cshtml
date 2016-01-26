@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "My Reader";
+}
+<style type="text/css">
+    /*fix jTable*/
+    span.jtable-goto-page select, span.jtable-page-size-change select {
+        height: 25px;
+        width: 60px;
+        padding: 2px 2px;
+        margin-bottom:auto;
+    }
+    div.jtable-main-container table.jtable thead th {
+        text-align: center;
+    }
+    div.jtable-main-container > table.jtable > tbody > tr.jtable-data-row > td {
+        text-align: center;
+    }
+</style>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#jTableReader').jtable({
+            title: 'My Reader',
+            paging: true, //Enable paging
+            pageSize: 10, //Set page size (default: 10)
+            sorting: true, //Enable sorting
+            selecting: true, //Enable selecting
+            defaultSorting: 'reader', //Set default sorting
+            actions: {
+                listAction: '@Url.Action("ReaderList","Inner")',
+                deleteAction: '@Url.Action("DeleteReader","Inner")',
+                updateAction: '@Url.Action("UpdateReader","Inner")',
+                createAction: '@Url.Action("CreateReader","Inner")'
+            },
+            fields: {
+                owner: { title: 'Owner', create: false, edit: false, list: false, type: 'hidden' },
+                reader: { title: 'Name', key: true, create: true, edit: false },
+                pass: { title: 'Password', create: true, edit: true, type: 'password', visibility: 'hidden' },
+                exp_dt: { title: 'Expire Date', create: true, edit: true, type: 'date', displayFormat: 'yy-mm-dd' }
+            }
+        });
+        //Load student list from server
+        $('#jTableReader').jtable('load');
+
+    });
+</script>
+
+<div class="alert alert-info">
+    + You can <strong>Create, Delete</strong> reader.<br />
+    - But <u>not</u> <strong>Edit</strong> reader name.
+</div>
+
+<div id="jTableReader"></div>

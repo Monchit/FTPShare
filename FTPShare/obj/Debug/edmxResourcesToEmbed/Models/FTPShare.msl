@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FTPShareModelStoreContainer" CdmEntityContainer="FTPShareEntities">
+    <EntitySetMapping Name="tm_sys_user">
+      <EntityTypeMapping TypeName="FTPShareModel.tm_sys_user">
+        <MappingFragment StoreEntitySet="tm_sys_user">
+          <ScalarProperty Name="emp_code" ColumnName="emp_code" />
+          <ScalarProperty Name="utype_id" ColumnName="utype_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="td_file">
+      <EntityTypeMapping TypeName="FTPShareModel.td_file">
+        <MappingFragment StoreEntitySet="td_file">
+          <ScalarProperty Name="exp_dt" ColumnName="exp_dt" />
+          <ScalarProperty Name="path" ColumnName="path" />
+          <ScalarProperty Name="filename" ColumnName="filename" />
+          <ScalarProperty Name="folder" ColumnName="folder" />
+          <ScalarProperty Name="owner" ColumnName="owner" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="td_owner_folder">
+      <EntityTypeMapping TypeName="FTPShareModel.td_owner_folder">
+        <MappingFragment StoreEntitySet="td_owner_folder">
+          <ScalarProperty Name="create_dt" ColumnName="create_dt" />
+          <ScalarProperty Name="exp_dt" ColumnName="exp_dt" />
+          <ScalarProperty Name="folder" ColumnName="folder" />
+          <ScalarProperty Name="owner" ColumnName="owner" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="td_reader_user">
+      <EntityTypeMapping TypeName="FTPShareModel.td_reader_user">
+        <MappingFragment StoreEntitySet="td_reader_user">
+          <ScalarProperty Name="exp_dt" ColumnName="exp_dt" />
+          <ScalarProperty Name="pass" ColumnName="pass" />
+          <ScalarProperty Name="reader" ColumnName="reader" />
+          <ScalarProperty Name="owner" ColumnName="owner" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tm_sys_utype">
+      <EntityTypeMapping TypeName="FTPShareModel.tm_sys_utype">
+        <MappingFragment StoreEntitySet="tm_sys_utype">
+          <ScalarProperty Name="authority" ColumnName="authority" />
+          <ScalarProperty Name="utype_name" ColumnName="utype_name" />
+          <ScalarProperty Name="utype_id" ColumnName="utype_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tr_reader_folder">
+      <EntityTypeMapping TypeName="FTPShareModel.tr_reader_folder">
+        <MappingFragment StoreEntitySet="tr_reader_folder">
+          <ScalarProperty Name="reader" ColumnName="reader" />
+          <ScalarProperty Name="folder" ColumnName="folder" />
+          <ScalarProperty Name="owner" ColumnName="owner" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
